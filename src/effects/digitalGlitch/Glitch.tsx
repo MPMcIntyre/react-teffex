@@ -10,9 +10,9 @@ type props = {
   style: any;
   alphabet: boolean;
   extendedAlphabet: boolean;
-  onMouseLeave: (event: any) => {};
-  onMouseEnter: (event: any) => {};
-  onClick: (event: any) => {};
+  onMouseLeave: (event: any) => void;
+  onMouseEnter: (event: any) => void;
+  onClick: (event: any) => void;
   id: string;
 };
 
