@@ -5,10 +5,12 @@ declare type props = {
     buffer: number;
     glitchSpeed: number;
     reverse: boolean;
+    style: any;
     alphabet: boolean;
     extendedAlphabet: boolean;
-    onMouseLeave: () => {};
-    onMouseEnter: () => {};
+    onMouseLeave: (event: any) => {};
+    onMouseEnter: (event: any) => {};
+    onClick: (event: any) => {};
     id: string;
 };
 declare type state = {
@@ -23,12 +25,12 @@ export default class Glitch extends React.Component<props, state> {
     private timer;
     alphabet: boolean;
     alph: string;
+    style: any;
     letters: string[];
     glitchSpeed: number;
     constructor(props: any);
     generateRandomValue: () => string;
     animate: () => void;
-    deAnimate(): void;
     glitch(): void;
     componentDidMount(): void;
     componentWillUnmount(): void;
