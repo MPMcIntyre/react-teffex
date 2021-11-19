@@ -15,6 +15,8 @@ These effects return a `<span>` element with your text and desired effect. You c
 [CodeSandBox example](https://codesandbox.io/s/react-teffex-example-c759r?file=/src/App.js)
 
 Have your text randomise between Roman alphabet letters or 1's and 0's and appear in sequence. The effect does discard timers on onMount, so for best practices be sure to remove or set the element to null on unMounting or rerendering.
+
+Note: For the best effect, use a font-family with consistent letter spacing e.g. Courier New, Courier, monospace
 ### Usage
 
 
