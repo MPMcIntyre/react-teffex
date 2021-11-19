@@ -7,10 +7,12 @@ type props = {
   buffer: number;
   glitchSpeed: number;
   reverse: boolean;
+  style: any;
   alphabet: boolean;
   extendedAlphabet: boolean;
-  onMouseLeave: () => {};
-  onMouseEnter: () => {};
+  onMouseLeave: (event: any) => {};
+  onMouseEnter: (event: any) => {};
+  onClick: (event: any) => {};
   id: string;
 };
 
@@ -26,8 +28,9 @@ export default class Glitch extends React.Component<props, state> {
   public start = 0;
   private timer: any = [];
   public alphabet: boolean;
-  public alph = "abcdefghijklmnopqrstuvwxyz";
 
+  alph: string;
+  style: any;
   letters: string[];
   public glitchSpeed: number;
 
@@ -41,11 +44,15 @@ export default class Glitch extends React.Component<props, state> {
     this.speed = this.props.speed ? this.props.speed : 50;
     this.buffer = this.props.buffer ? this.props.buffer : 5;
     this.total = props.text.length + this.buffer;
-    this.glitchSpeed = this.props.glitchSpeed ? this.props.glitchSpeed : 1;
+    this.glitchSpeed = this.props.glitchSpeed ? this.props.glitchSpeed : 5000;
+    this.style = this.props.style ? this.props.style : {};
 
-    if (this.props.extendedAlphabet)
+    if (this.props.extendedAlphabet) {
       this.alph =
         "aàáâäæãåābcçćčdeèéêëēėęfghiîïíīįìjklłmnñńoôöòóœøōõpqrsßśštuûüùúūvwxyÿzžźż";
+    } else {
+      this.alph = "abcdefghijklmnopqrstuvwxyz";
+    }
 
     this.letters = this.alph
       .split("")
@@ -78,8 +85,9 @@ export default class Glitch extends React.Component<props, state> {
             }
             this.start++;
           }
+
           if (i === this.total - 1) {
-            this.glitchSpeed && this.glitch();
+            this.glitch();
           }
 
           if (this.props.reverse) {
@@ -102,26 +110,26 @@ export default class Glitch extends React.Component<props, state> {
     }
   };
 
-  deAnimate() {
-    this.start = 0;
-    for (let i = 0; i < this.total; i++) {
-      let text = this.state.text;
-      let timer = setTimeout(() => {
-        // If we reach the buffer, start returning the word
-        if (i >= this.buffer) {
-          text = setCharAt(text, this.start, this.generateRandomValue());
-          this.start++;
-        }
-        if (i === this.total - 1) {
-          this.glitchSpeed && this.glitch();
-        }
-        this.setState({
-          text: text,
-        });
-      }, i * this.speed);
-      this.timer.push(timer);
-    }
-  }
+  // deAnimate() {
+  //   this.start = 0;
+  //   for (let i = 0; i < this.total; i++) {
+  //     let text = this.state.text;
+  //     let timer = setTimeout(() => {
+  //       // If we reach the buffer, start returning the word
+  //       if (i >= this.buffer) {
+  //         text = setCharAt(text, this.start, this.generateRandomValue());
+  //         this.start++;
+  //       }
+  //       if (i === this.total - 1) {
+  //         this.glitchSpeed && this.glitch();
+  //       }
+  //       this.setState({
+  //         text: text,
+  //       });
+  //     }, i * this.speed);
+  //     this.timer.push(timer);
+  //   }
+  // }
 
   glitch() {
     const glitchTimer = setTimeout(async () => {
@@ -145,7 +153,7 @@ export default class Glitch extends React.Component<props, state> {
           }, randomise(300));
         }, randomise(100));
       }, randomise(100));
-    }, randomise(100000) / this.glitchSpeed);
+    }, randomise(this.glitchSpeed));
     this.timer.push(glitchTimer);
   }
 
@@ -162,11 +170,15 @@ export default class Glitch extends React.Component<props, state> {
   render() {
     return (
       <span
-        onMouseEnter={() => {
-          this.props.onMouseEnter && this.props.onMouseEnter();
+        style={this.style}
+        onMouseEnter={(e: any) => {
+          this.props.onMouseEnter && this.props.onMouseEnter(e);
         }}
-        onMouseLeave={() => {
-          this.props.onMouseLeave && this.props.onMouseLeave();
+        onMouseLeave={(e: any) => {
+          this.props.onMouseLeave && this.props.onMouseLeave(e);
+        }}
+        onClick={(e: any) => {
+          this.props.onClick && this.props.onClick(e);
         }}
         id={this.props.id && this.props.id}>
         {this.state.text}
