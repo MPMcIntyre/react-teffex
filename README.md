@@ -24,7 +24,7 @@ import {Glitch} from "react-teffex";
 
 export default function AwesomeGlitchEffect(props) {
 
-  const myGlitchEffects = (
+  let myGlitchEffects = (
     <div>
       <Glitch alphabet buffer={20} text={"This is glitchy text!"} />
       <Glitch
