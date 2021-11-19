@@ -3,17 +3,17 @@ import { randomise, setCharAt } from "../utils";
 
 type props = {
   text: string;
-  speed: number;
-  buffer: number;
-  glitchSpeed: number;
-  reverse: boolean;
-  style: any;
-  alphabet: boolean;
-  extendedAlphabet: boolean;
-  onMouseLeave: (event: any) => void;
-  onMouseEnter: (event: any) => void;
-  onClick: (event: any) => void;
-  id: string;
+  speed?: number;
+  buffer?: number;
+  glitchSpeed?: number;
+  reverse?: boolean;
+  style?: any;
+  alphabet?: boolean;
+  extendedAlphabet?: boolean;
+  onMouseLeave?: (event: any) => void;
+  onMouseEnter?: (event: any) => void;
+  onClick?: (event: any) => void;
+  id?: string;
 };
 
 type state = {
