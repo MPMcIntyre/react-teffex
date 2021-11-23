@@ -7,6 +7,7 @@ These effects return a `<span>` element with your text and desired effect. You c
 # Effects
 
 [Glitch](#glitch)
+
 [Typewriter](#typewriter)
 
 
@@ -102,15 +103,14 @@ import {Typewriter} from "react-teffex";
 
 export default function AwesomeGlitchEffect(props) {
 
-  let myGlitchEffects = (
+  return (
     <div>
       <Typewriter text={"This is a general typewriter"} />
       <Typewriter
         cycle={["This will cycle", "and stop"]}
-        typeSettings={{ initialDelay: 12000 }}
       />
       <Typewriter
-        typeSettings={{ initialDelay: 19000 }}
+        typeSettings={{ initialDelay: 1000 }}
         text={"This will cycle "}
         cycle={["forever", "and ever"]}
         loop
@@ -118,11 +118,6 @@ export default function AwesomeGlitchEffect(props) {
     </div>
   );
 
-  return (
-    <div className="container">
-      {myGlitchEffects}
-    </div>
-  );
 }
 ````
 
