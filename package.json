@@ -1,6 +1,6 @@
 {
-  "name": "react-teffex",
-  "version": "0.0.5",
+  "name": "react-teffex-prerelease",
+  "version": "0.0.6",
   "description": "Text Effects: Stateful React text effects for amazing websites",
   "main": "./lib/Effects.js",
   "repository": "https://github.com/MPMcIntyre/react-teffex",
@@ -12,8 +12,6 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
-    "lorem-ipsum": "^2.0.4",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^17.0.2"
   }
 }
