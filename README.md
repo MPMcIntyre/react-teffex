@@ -7,12 +7,14 @@ These effects return a `<span>` element with your text and desired effect. You c
 # Effects
 
 [Glitch](#glitch)
+[Typewriter](#typewriter)
+
 
 <a name="glitch"></a>
 
 # Glitch
 
-[CodeSandBox example](https://codesandbox.io/s/react-teffex-glitch-example-c759r)
+[CodeSandBox example](https://codesandbox.io/s/react-teffex-example-c759r)
 
 Have your text randomise between Roman alphabet letters or 1's and 0's and appear in sequence. The effect does discard timers on onMount, so for best practices be sure to remove or set the element to null on unMounting or rerendering.
 
@@ -76,6 +78,81 @@ Parameters
 `style`: `object` React styled components
 
 `extendedAlphabet`: `boolean`; Will use the extended Roman alphabet (i.e. includes characters like ß, ę, į etc.)
+
+`onClick`:`function` (event)=>{} Runs a function you provide with the event as the parameter
+
+`onMouseEnter`:`function` (event)=>{} Runs a function you provide with the event as the parameter
+
+`onMouseLeave`:`function` (event)=>{} Runs a function you provide with the event as the parameter
+
+<a name="typewriter"></a>
+
+# Typewriter
+
+[CodeSandBox example](https://codesandbox.io/s/react-teffex-typewriter-example-wx8ib)
+
+One of the most elegant typewriter effects for react. No setTimeout or setInterfals used, everything is based on RAF with indexed values for a super lightweight interface. Highly customizable, from the initial delay, to the stutter delay, stutter chance,  
+
+### Usage
+
+
+````
+import React from "react";
+import {Typewriter} from "react-teffex";
+
+export default function AwesomeGlitchEffect(props) {
+
+  let myGlitchEffects = (
+    <div>
+      <Typewriter text={"This is a general typewriter"} />
+      <Typewriter
+        cycle={["This will cycle", "and stop"]}
+        typeSettings={{ initialDelay: 12000 }}
+      />
+      <Typewriter
+        typeSettings={{ initialDelay: 19000 }}
+        text={"This will cycle "}
+        cycle={["forever", "and ever"]}
+        loop
+      />
+    </div>
+  );
+
+  return (
+    <div className="container">
+      {myGlitchEffects}
+    </div>
+  );
+}
+````
+
+Parameters
+
+`<Typewriters {parameters} />`
+
+`text`:`string` The text you wish to display through the effect (persistant)
+
+`cycle`:`string[]` Arrays that will display, backspace after cycleDelay time, then display the next item. If it is the last item and no loop prop is provided, it will persist.
+
+`cycleDelay`:`number` Amount of time between each cycle in ms
+
+`id`:`string` CSS id that can be added to your text for CSS modifications and events
+
+`loop`: `boolean` if true, will continuously loop through each cycle provided
+
+`typeSettings.stutterTime`: `number` The delay when stuttering (pause typing) in ms
+
+`typeSettings.stutterChance`: `number` Chance out of 10 (actually 9) to stutter
+
+`typeSettings.typeDelay`: `number` The delay between each character being typed in ms (determines the type speed)
+
+`typeSettings.initialDelay`: `number` Initial delay before effect starts in ms
+
+`cursorSettings.color`: `string` Colour of the cursor
+
+`cursorSettings.cursorBlinkSpeed`: `string` Delay time between cursor blinking in ms
+
+`style`: `object` React styled components
 
 `onClick`:`function` (event)=>{} Runs a function you provide with the event as the parameter
 

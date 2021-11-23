@@ -6,7 +6,6 @@ type props = {
   style?: any;
   cycle?: string[];
   cycleDelay?: number;
-  displayTime?: number;
   loop?: boolean;
   typeSettings?: {
     stutterTime?: number;
@@ -42,7 +41,6 @@ export default class Typewriter extends React.Component<props, states> {
   backgroundColor: any;
   stutterInterval: number;
   stutterTime: number;
-  displayTime: number;
   text: string;
   cycleIndex: number;
   cycleDelay: number;
@@ -65,7 +63,6 @@ export default class Typewriter extends React.Component<props, states> {
     };
 
     // Type settings
-    this.displayTime = 0;
     this.index = 0;
     this.stutterTime = this.props.typeSettings?.stutterTime
       ? this.props.typeSettings.stutterTime
@@ -112,7 +109,7 @@ export default class Typewriter extends React.Component<props, states> {
   shouldIStutter = () => {
     let chance = this.props.typeSettings?.stutterChance
       ? this.props.typeSettings.stutterChance
-      : 1;
+      : 2;
     // Chance
     if (randomise(10) < chance) {
       this.stutterInterval = this.stutterTime;
@@ -234,6 +231,7 @@ export default class Typewriter extends React.Component<props, states> {
   render() {
     return (
       <span
+        onClick={this.props.onClick && this.props.onClick}
         onMouseEnter={this.props.onMouseEnter && this.props.onMouseEnter}
         onMouseLeave={this.props.onMouseLeave && this.props.onMouseLeave}
         id={this.props.id && this.props.id}
@@ -276,4 +274,6 @@ function checkPropsForErrors(props: props) {
     throw new TypeError("Exected a function for 'onMouseEnter' prop");
   if (props.onClick && typeof props.onClick !== "function")
     throw new TypeError("Exected a function for 'onClick' prop");
+  if (props.loop && !props.cycle)
+    throw new TypeError("Cannot loop when no cycle is provided");
 }
