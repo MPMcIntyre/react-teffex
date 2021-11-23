@@ -12,7 +12,7 @@ These effects return a `<span>` element with your text and desired effect. You c
 
 # Glitch
 
-[CodeSandBox example](https://codesandbox.io/s/react-teffex-example-c759r?file=/src/App.js)
+[CodeSandBox example](https://codesandbox.io/s/react-teffex-glitch-example-c759r)
 
 Have your text randomise between Roman alphabet letters or 1's and 0's and appear in sequence. The effect does discard timers on onMount, so for best practices be sure to remove or set the element to null on unMounting or rerendering.
 

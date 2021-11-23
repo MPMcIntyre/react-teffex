@@ -11,7 +11,7 @@ type props = {
   typeSettings?: {
     stutterTime?: number;
     typeDelay?: number;
-    buffer?: number;
+    initialDelay?: number;
     stutterChance: number;
   };
   cursorSettings?: {
@@ -47,6 +47,7 @@ export default class Typewriter extends React.Component<props, states> {
   cycleIndex: number;
   cycleDelay: number;
   cycleTimer: number;
+  initialDelay: number;
 
   constructor(props: props) {
     super(props);
@@ -75,6 +76,9 @@ export default class Typewriter extends React.Component<props, states> {
     this.typeDelay = this.props.typeSettings?.typeDelay
       ? this.props.typeSettings.typeDelay
       : 100;
+    this.initialDelay = this.props.typeSettings?.initialDelay
+      ? this.props.typeSettings.initialDelay
+      : 0;
 
     // Cycle settings
     this.cycleIndex = 0;
@@ -179,8 +183,9 @@ export default class Typewriter extends React.Component<props, states> {
     // Type
     if (
       window.performance.now() - this.typeTimer >=
-      this.typeDelay + this.stutterInterval
+      this.typeDelay + this.stutterInterval + this.initialDelay
     ) {
+      if (this.initialDelay) this.initialDelay = 0;
       this.typeTimer = window.performance.now();
       // If the current text is not done typing, continue typing
       if (this.index <= this.text.length - 1) {

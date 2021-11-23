@@ -1,6 +1,6 @@
 {
   "name": "react-teffex-prerelease",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "Text Effects: Stateful React text effects for amazing websites",
   "main": "./lib/Effects.js",
   "repository": "https://github.com/MPMcIntyre/react-teffex",
