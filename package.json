@@ -1,9 +1,9 @@
 {
   "name": "react-teffex",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Text Effects: Stateful React text effects for amazing websites",
   "main": "./lib/Effects.js",
-  "repository": "https://github.com/MPMcIntyre/react-teffex",
+  "repository": "git://github.com/MPMcIntyre/react-teffex",
   "author": "M. McIntyre",
   "license": "MIT",
   "private": false,
@@ -13,5 +13,13 @@
   },
   "dependencies": {
     "react": "^17.0.2"
-  }
+  },
+  "keywords": [
+    "react",
+    "text",
+    "effect",
+    "animation",
+    "glitch",
+    "typewriter"
+  ]
 }
