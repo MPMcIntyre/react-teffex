@@ -5,3 +5,4 @@ CONTRIBUTING.md
 tsconfig.json
 yarn.lock
 node_modules
+.npmrc
