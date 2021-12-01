@@ -240,7 +240,6 @@ export default class Typewriter extends React.Component<props, states> {
 
   componentWillUnmount() {
     this.isActive.current = false;
-    console.log(this.isActive);
   }
 
   render() {
