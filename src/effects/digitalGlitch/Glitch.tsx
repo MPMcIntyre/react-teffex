@@ -27,11 +27,11 @@ export default class Glitch extends React.Component<props, state> {
   public total: number;
   public start = 0;
   private timer: any = [];
-  public alphabet: boolean;
 
   alph: string;
   style: any;
   letters: string[];
+  isActive: any;
   public glitchSpeed: number;
 
   constructor(props: any) {
@@ -40,6 +40,7 @@ export default class Glitch extends React.Component<props, state> {
       text: props.text,
       hasAnimated: false,
     };
+    this.isActive = React.createRef();
 
     this.speed = this.props.speed ? this.props.speed : 50;
     this.buffer = this.props.buffer ? this.props.buffer : 5;
@@ -110,27 +111,7 @@ export default class Glitch extends React.Component<props, state> {
     }
   };
 
-  // deAnimate() {
-  //   this.start = 0;
-  //   for (let i = 0; i < this.total; i++) {
-  //     let text = this.state.text;
-  //     let timer = setTimeout(() => {
-  //       // If we reach the buffer, start returning the word
-  //       if (i >= this.buffer) {
-  //         text = setCharAt(text, this.start, this.generateRandomValue());
-  //         this.start++;
-  //       }
-  //       if (i === this.total - 1) {
-  //         this.glitchSpeed && this.glitch();
-  //       }
-  //       this.setState({
-  //         text: text,
-  //       });
-  //     }, i * this.speed);
-  //     this.timer.push(timer);
-  //   }
-  // }
-
+  // this.isActive.current is used a lot in order to deter any unMounting side effects to ensure that a memory leak does not occur
   glitch() {
     const glitchTimer = setTimeout(async () => {
       let word = this.state.text;
@@ -140,28 +121,34 @@ export default class Glitch extends React.Component<props, state> {
       // Glitch word
       let newWord = setCharAt(word, letter, this.generateRandomValue());
       this.setState({ text: newWord });
-      setTimeout(() => {
-        let newWord = setCharAt(word, letter, mem);
-        this.setState({ text: newWord });
+      this.isActive.current &&
         setTimeout(() => {
-          let newWord = setCharAt(word, letter, this.generateRandomValue());
-          this.setState({ text: newWord });
-          setTimeout(() => {
-            let newWord = setCharAt(word, letter, mem);
-            this.setState({ text: newWord });
-            this.glitch();
-          }, randomise(300));
+          let newWord = setCharAt(word, letter, mem);
+          this.isActive.current && this.setState({ text: newWord });
+          this.isActive.current &&
+            setTimeout(() => {
+              let newWord = setCharAt(word, letter, this.generateRandomValue());
+              this.isActive.current && this.setState({ text: newWord });
+              this.isActive.current &&
+                setTimeout(() => {
+                  let newWord = setCharAt(word, letter, mem);
+                  this.isActive.current && this.setState({ text: newWord });
+                  this.isActive.current && this.glitch();
+                }, randomise(300));
+            }, randomise(100));
         }, randomise(100));
-      }, randomise(100));
     }, randomise(this.glitchSpeed));
     this.timer.push(glitchTimer);
   }
 
   componentDidMount() {
+    this.isActive.current = true;
     this.animate();
   }
 
   componentWillUnmount() {
+    this.isActive.current = false;
+
     for (let i = 0; i < this.timer.length; i++) {
       clearTimeout(this.timer[i]);
     }
