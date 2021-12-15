@@ -152,7 +152,7 @@ export default class Glitch extends React.Component<props, state> {
     this.glitchCycleTimer = performance.now();
     this.glitchCycleSpeed = randomise(this.glitchSpeed);
     this.glitchTimers = [this.glitchCycleSpeed + randomise(100), 0, 0].map(
-      (current, i, array) => {
+      (_current, i, array) => {
         if (i == 2)
           return (array[i] += array[i - 1] ? array[i - 1] + randomise(300) : 0);
         return (array[i] += array[i - 1] ? array[i - 1] + randomise(100) : 0);
