@@ -2,7 +2,7 @@
 
 Text Effects: Stateful React text effects for amazing websites
 
-These effects return a `<span>` element with your text and desired effect. You can use them in links, headings, divs and spans alike.
+These effects return a `<span>` element with your text and desired effect. You can use them in links, headings, divs and spans alike. These effects use RAF (request animation frame) for optimal performance and less reliance on setTimeout/setInterval.
 
 # Effects
 
@@ -71,6 +71,8 @@ Parameters
 `speed`:`number` Loop delay of the animation in ms (smaller is faster) (default = 50ms)
 
 `glitchSpeed`: `number` Maximum delay before next glitch (the glitch timer uses a random value between 0 and the glitchSpeed in ms, smaller is faster) (default = 5000ms)
+
+`dontGlitch`:`boolean` specify if you do not want the text to glitch after initial animation
 
 `buffer`: `number` Adds additional loops to the animation in order to delay the word revealing itself (default = 0)
   
