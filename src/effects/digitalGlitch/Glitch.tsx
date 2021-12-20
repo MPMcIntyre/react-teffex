@@ -205,7 +205,6 @@ export default class Glitch extends React.Component<props, state> {
         this.glitchLetter,
         this.glitchMem
       );
-      console.log("Stupid");
 
       this.setState({ text: newWord });
       this.setGlitchTimers();
@@ -213,9 +212,6 @@ export default class Glitch extends React.Component<props, state> {
   }
 
   componentDidMount() {
-    window.addEventListener("visibilitychange", () => {
-      // console.log("Blurr");
-    });
     // Randomise the text for the initial display
     let text = this.state.text;
     text = this.randomiseRemainingText(text);
